@@ -158,7 +158,7 @@ with visualisasi:
         ).properties(width=600)
         st.altair_chart(top5_small_chart, use_container_width=True)
 
-    st.write("""Keberadaan kecamatan Tomang dan Pademangan pada grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata tertinggi dan Keberadaan kecamatan Jagakarsa dan Pasar Rebo pad grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata Terendah menandakan bahwa semakin besar luas bangunannya, maka semakin besar pula harga rumahnya. Sebaliknya semakin kecil luas bangunannya, semakin murah pula harga rumahnya.""")
+    st.write('<div style="text-align: justify">Keberadaan kecamatan Tomang dan Pademangan pada grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata tertinggi dan Keberadaan kecamatan Jagakarsa dan Pasar Rebo pad grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata Terendah menandakan bahwa semakin besar luas bangunannya, maka semakin besar pula harga rumahnya. Sebaliknya semakin kecil luas bangunannya, semakin murah pula harga rumahnya.</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
     # Visualisasi: Harga Rata-Rata Properti Berdasarkan Kota dan Kecamatan
