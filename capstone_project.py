@@ -152,7 +152,7 @@ with visualisasi:
         ).properties(width=600)
         st.altair_chart(top5_small_chart, use_container_width=True)
 
-    st.write('<div style="text-align: justify">Keberadaan kecamatan Tomang dan Pademangan pada grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata tertinggi dan Keberadaan kecamatan Jagakarsa dan Pasar Rebo pada grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata Terendah menandakan bahwa semakin besar luas bangunannya, maka semakin besar pula harga rumahnya. Sebaliknya semakin kecil luas bangunannya, semakin murah pula harga rumahnya.</div>', unsafe_allow_html=True)
+    st.write('<div style="text-align: justify">Keberadaan kecamatan Tomang dan Pademangan pada grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata tertinggi dan Keberadaan kecamatan Jagakarsa dan Pasar Rebo pad grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata Terendah menandakan bahwa semakin besar luas bangunannya, maka semakin besar pula harga rumahnya. Sebaliknya semakin kecil luas bangunannya, semakin murah pula harga rumahnya.</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
     # Visualisasi: Harga Rata-Rata Properti Berdasarkan Kota dan Kecamatan
@@ -177,6 +177,12 @@ with visualisasi:
 
     # Tampilkan chart
     st.altair_chart(chart, use_container_width=True)
+
+    # Correlation Matrix
+    st.subheader("Correlation Matrix")
+    st.image('Correlation Matrix.png')
+    st.write('<div style="text-align: justify">Berdasarkan Correlation Matrix di atas, Luas Bangunan, Luas Tanah, Jumlah Kamar Tidur, dan Jumlah Kamar Mandi adalah variabel yang mempengaruhi harga rumah, terutama Luas Bangunan dan Luas tanah yang nilai korelasinya paling tinggi.</div>', unsafe_allow_html=True)
+
 
 with prediksi:
     # Header Prediksi Harga Rumah
@@ -246,6 +252,10 @@ with prediksi:
 
         # Menampilkan hasil prediksi
         st.write(f'Prediksi Harga Rumah: {formatted_price}')
+
+        st.subheader("Evaluasi Model")
+        st.image('Evaluasi.png')
+        st.image('Grafik Prediksi.png')
 
 
 with about:
