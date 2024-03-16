@@ -184,21 +184,24 @@ with visualisasi:
     # Tampilkan chart
     st.altair_chart(chart, use_container_width=True)
 
-    def correlation_matrix(df):
-        # Calculate correlation
-        corr = df.corr()
+    # Variabel yang akan dimasukkan ke dalam matriks korelasi
+    columns = ['Harga', 'Luas Bangunan', 'Luas Tanah', 'Kamar Tidur', 'Kamar Mandi', 
+            'Lantai', 'HGB', 'Lainnya (PPJB, Girik, Adat, dll)', 'SHM', 
+            'Jakarta Selatan', 'Jakarta Timur', 'Jakarta Pusat', 'Jakarta Barat', 'Jakarta Utara']
 
-        # Plotting correlation matrix using seaborn
-        plt.figure(figsize=(12, 8))
-        sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f", annot_kws={"size": 10})
-        plt.title('Correlation Matrix')
-        st.pyplot()
+    # Buat sub-dataset hanya dengan kolom-kolom yang dipilih
+    df_col = df[columns]
 
-    # Correlation Matrix
-    st.title('Correlation Matrix')
+    # Buat matriks korelasi
+    corr_matrix = df_col.corr()
 
-    # Menampilkan correlation matrix
-    correlation_matrix(df[['Harga', 'Luas Bangunan', 'Luas Tanah', 'Kamar Tidur', 'Kamar Mandi', 'Lantai', 'HGB', 'Lainnya (PPJB, Girik, Adat, dll)', 'SHM', 'Jakarta Selatan', 'Jakarta Timur', 'Jakarta Pusat', 'Jakarta Barat', 'Jakarta Utara']])
+    # Plot matriks korelasi menggunakan heatmap
+    fig, ax = plt.subplots()
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f", ax=ax)
+    ax.set_title('Correlation Matrix')
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, horizontalalignment='right')
+    ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
+    st.pyplot(fig)
 
 with prediksi:
     # Header Prediksi Harga Rumah
