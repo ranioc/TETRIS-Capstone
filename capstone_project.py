@@ -4,6 +4,9 @@ import pandas as pd
 import altair as alt
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, accuracy_score
 
 # Membaca Model
 regression_model = pickle.load(open('regression_model.sav', 'rb'))
@@ -232,20 +235,35 @@ with prediksi:
                                 'Kota_Jakarta Timur': [1 if kota == 'Jakarta Timur' else 0],
                                 'Kota_Jakarta Utara': [1 if kota == 'Jakarta Utara' else 0]})
 
-        
-        # Membuat prediksi
-        predicted_price = regression_model.predict(new_data)
+        # Memisahkan fitur dan target dari data
+        X = df.drop('Harga', axis=1)
+        y = df['Harga']
 
-        # Fungsi untuk format mata uang Rupiah tanpa desimal
-        def format_rupiah(amount):
-            formatted_price = f"Rp {int(amount):,}"
-            return formatted_price
+        # Pembagian data menjadi data pelatihan dan data pengujian
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        # Melatih model pada data pelatihan
+        regression_model = LinearRegression()
+        regression_model.fit(X_train, y_train)
+
+        # Menguji model pada data pengujian
+        y_pred = regression_model.predict(X_test)
+
+        # Menghitung metrik evaluasi
+        mse = mean_squared_error(y_test, y_pred)
+        mae = mean_absolute_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
+        accuracy = accuracy_score(y_test, y_pred)
 
         # Format mata uang Rupiah
         formatted_price = format_rupiah(predicted_price[0])
 
         # Menampilkan hasil prediksi
         st.write(f'Prediksi Harga Rumah: {formatted_price}')
+        st.write(f'MSE: {mse}')
+        st.write(f'MAE: {mae}')
+        st.write(f'R^2: {r2}')
+        st.write(f'Akurasi: {accuracy}')
 
 
 with about:
