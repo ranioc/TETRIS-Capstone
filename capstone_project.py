@@ -180,7 +180,7 @@ with visualisasi:
 
     # Correlation Matrix
     st.subheader("Correlation Matrix")
-    st.image('Correlation Matrix.png')
+    st.image('Correlation Matrix.png', caption=None)
     st.write('<div style="text-align: justify">Berdasarkan Correlation Matrix di atas, Luas Bangunan, Luas Tanah, Jumlah Kamar Tidur, dan Jumlah Kamar Mandi adalah variabel yang mempengaruhi harga rumah, terutama Luas Bangunan dan Luas tanah yang nilai korelasinya paling tinggi.</div>', unsafe_allow_html=True)
 
 
@@ -254,8 +254,8 @@ with prediksi:
         st.write(f'Prediksi Harga Rumah: {formatted_price}')
 
         st.subheader("Evaluasi Model")
-        st.image('Evaluasi.png')
-        st.image('Grafik Prediksi.png')
+        st.image('Evaluasi.png', caption="Nilai MAE, MSE, R2, dan Accuracy Model")
+        st.image('Grafik Prediksi.png', caption="Hasil Prediksi VS Harga Sebenarnya")
 
 
 with about:
