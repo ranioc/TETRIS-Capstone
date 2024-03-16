@@ -250,12 +250,12 @@ with prediksi:
         # Format mata uang Rupiah
         formatted_price = format_rupiah(predicted_price[0])
 
-        # Menampilkan hasil prediksi
-        st.write(f'Prediksi Harga Rumah: {formatted_price}')
+    # Menampilkan hasil prediksi
+    st.write(f'Prediksi Harga Rumah: {formatted_price}')
 
-        st.subheader("Evaluasi Model")
-        st.image('Evaluasi.png', caption="Nilai MAE, MSE, R2, dan Accuracy Model")
-        st.image('Grafik Prediksi.png', caption="Hasil Prediksi VS Harga Sebenarnya")
+    st.subheader("Evaluasi Model")
+    st.image('Evaluasi.png', caption="Nilai MAE, MSE, R2, dan Accuracy Model")
+    st.image('Grafik Prediksi.png', caption="Hasil Prediksi VS Harga Sebenarnya")
 
 
 with about:
