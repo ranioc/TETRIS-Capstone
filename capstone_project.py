@@ -92,6 +92,7 @@ with visualisasi:
     st.write('<div style="text-align: justify">Rumah dengan 2 Kamar Mandi dan 3 Kamar Tidur merupakan rumah yang paling banyak dijual. Hal ini dapat menandakan bahwa minat pasar yang banyak tertuju pada rumah dengan 3 Kamar TIdur dan 2 Kamar Mandi</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
+
     #Analisis Level Kecamatan
     
     # Visualisasi: Banyaknya rumah yang dijual di tiap kecamatan
