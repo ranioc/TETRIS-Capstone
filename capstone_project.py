@@ -75,6 +75,7 @@ with visualisasi:
         bed_chart = alt.Chart(df).mark_bar().encode(
             x=alt.X('Jumlah Kamar Tidur:N', title='Kamar Tidur'),
             y='count():Q',
+            color='Kamar Tidur:N',
             tooltip=['count():Q']
         ).properties(width=600)
         st.altair_chart(bed_chart, use_container_width=True)
@@ -85,13 +86,13 @@ with visualisasi:
         bath_chart = alt.Chart(df).mark_bar().encode(
             x=alt.X('Jumlah Kamar Mandi:N', title='Kamar Mandi'),
             y='count():Q',
+            color='Kamar Mandi:N',
             tooltip=['count():Q']
         ).properties(width=600)
         st.altair_chart(bath_chart, use_container_width=True)
 
     st.write('<div style="text-align: justify">Rumah dengan 2 Kamar Mandi dan 3 Kamar Tidur merupakan rumah yang paling banyak dijual. Hal ini dapat menandakan bahwa minat pasar yang banyak tertuju pada rumah dengan 3 Kamar TIdur dan 2 Kamar Mandi</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
-
 
     #Analisis Level Kecamatan
     
