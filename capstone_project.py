@@ -128,7 +128,7 @@ with visualisasi:
         ).properties(width=600)
         st.altair_chart(top5_cheap_chart, use_container_width=True)
 
-    st.write('<div style="text-align: justify">Pada di kiri, dapat dilihat bahwa Kecamatan Tomang merupkaan kecamatan dengan harga rata-rata tertinggi. Hal ini bisa mengindikasikan kecamatan tersebut merupakan kawasan elite, sehingga rata-rata harga rumahnya adalah yang paling mahal. Sedangkan pada grafik di kanan, dapat dilihat bahwa Kecamatan Ciracas, Jagakarsa, Kalideres, Pasar Rebo, dan Tanjung Barat, memiliki harga rata-rata rumah yang paling rendah. Jika dilihat, kecamatan-kecamatan tersebut berada di pinggiran Provinsi DKI Jakarta yang agak jauh dari pusat kota. Sehingga dapat disimpulkan bahwa, kecamatan yang jauh dari pusat kota harganya lebih rendah daripada yang dekat dengan pusat kota.</div>', unsafe_allow_html=True)
+    st.write('<div style="text-align: justify">Pada grafik di kiri, dapat dilihat bahwa Kecamatan Tomang merupakan kecamatan dengan harga rata-rata tertinggi. Hal ini bisa mengindikasikan kecamatan tersebut merupakan kawasan elite, sehingga rata-rata harga rumahnya adalah yang paling mahal. Sedangkan pada grafik di kanan, dapat dilihat bahwa Kecamatan Ciracas, Jagakarsa, Kalideres, Pasar Rebo, dan Tanjung Barat, memiliki harga rata-rata rumah yang paling rendah. Jika dilihat, kecamatan-kecamatan tersebut berada di pinggiran Provinsi DKI Jakarta yang agak jauh dari pusat kota. Sehingga dapat disimpulkan bahwa, kecamatan yang jauh dari pusat kota harganya lebih rendah daripada yang dekat dengan pusat kota.</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
     col7, col8 = st.columns(2)
@@ -160,7 +160,7 @@ with visualisasi:
     average_price_by_city_district = df.groupby(['Kota', 'Kecamatan'])['Harga'].mean().reset_index()
 
     # Membuat grafik harga rata-rata properti berdasarkan kota dan kecamatan
-    st.subheader('Harga Rata-rata Properti Berdasarkan Kota dan Kecamatan')
+    st.subheader('Harga Rata-Rata Properti Berdasarkan Kota dan Kecamatan')
 
     # Pilih Kota menggunakan multiselect
     selected_city = st.multiselect('Pilih Kota', average_price_by_city_district['Kota'].unique())
