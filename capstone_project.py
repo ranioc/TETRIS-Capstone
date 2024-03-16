@@ -18,8 +18,6 @@ Selamat datang di Dashboard "Harga Rumah dan Karakteristik Properti di Provinsi 
 
 st.write(f'<div style="text-align: justify">{welcome_text}</div>', unsafe_allow_html=True)
 
-st.markdown("---")
-
 visualisasi, prediksi, about = st.tabs(['Visualisasi Data', 'Prediksi Harga Rumah', 'Author'])
 
 with visualisasi:
@@ -118,8 +116,6 @@ with visualisasi:
             tooltip=['Harga:Q']
         ).properties(width=600)
         st.altair_chart(top5_expensive_chart, use_container_width=True)
-        st.write('<div style="text-align: justify">Kecamatan pada grafik tersebut dapat menandakan kawasan elite yang biasanya dihuni oleh orang-orang dengan pendapatan tinggi karena rata-rata harga rumah pada daerah tersebut adalah yang paling mahal.</div>', unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
 
     with col6:
         # Visualisasi: Top 5 Kecamatan dengan Harga Rata-Rata Terendah
@@ -130,9 +126,9 @@ with visualisasi:
             tooltip=['Harga:Q']
         ).properties(width=600)
         st.altair_chart(top5_cheap_chart, use_container_width=True)
-        st.write('<div style="text-align: justify">Pada grafik ini, dapat disimpulkan bahwa kecamatan Ciracas, Jagakarsa, Kalideres, Pasar Rebo, dan Tanjung Barat merupakan kecamatan yang berada di daerah pinggiran Provinsi DKI Jakarta yang agak jauh dari pusat kota, sehingga rata-rata harga rumahnya paling rendah dibandingkan kecamatan lain.</div>', unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
 
+    st.write('<div style="text-align: justify">Pada di kiri, dapat dilihat bahwa Kecamatan Tomang merupkaan kecamatan dengan harga rata-rata tertinggi. Hal ini bisa mengindikasikan kecamatan tersebut merupakan kawasan elite, sehingga rata-rata harga rumahnya adalah yang paling mahal. Sedangkan pada grafik di kanan, dapat dilihat bahwa Kecamatan Ciracas, Jagakarsa, Kalideres, Pasar Rebo, dan Tanjung Barat, memiliki harga rata-rata rumah yang paling rendah. Jika dilihat, kecamatan-kecamatan tersebut berada di pinggiran Provinsi DKI Jakarta yang agak jauh dari pusat kota. Sehingga dapat disimpulkan bahwa, kecamatan yang jauh dari pusat kota harganya lebih rendah daripada yang dekat dengan pusat kota.</div>', unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
     col7, col8 = st.columns(2)
 
