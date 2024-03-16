@@ -20,7 +20,9 @@ st.write(welcome_text)
 
 st.markdown("---")
 
-def visualisasi_data():
+visualisasi, prediksi, about = st.tabs(['Visualisasi Data', 'Prediksi Harga Rumah', 'Author'])
+
+with visualisasi:
     # Header analisis data harga jual rumah
     st.header("Visualisasi Data")
     st.markdown("---")
@@ -28,6 +30,7 @@ def visualisasi_data():
     # Load data
     df = pd.read_csv('rumah_jakarta_clean.csv')
 
+    # Analisis Level Kota
     # Visualisasi: Banyaknya rumah yang dijual di masing-masing kota
     st.subheader('Banyaknya Rumah yang Dijual di Masing-Masing Kota')
     city_count_chart = alt.Chart(df).mark_bar().encode(
@@ -39,57 +42,9 @@ def visualisasi_data():
     st.write("""Jakarta Selatan merupakan kota dengan jumlah rumah dijual terbanyak, sedangkan Jakarta Utara adalah yang paling sedikit. Hal ini mungkin disebabkan karena tingginya permintaan rumah di Jakarta Selatan yang disebabkan oleh terpusatnya pertumbuhan ekonomi di wilayah tersebut yang dapat diindikasikan oleh banyaknya pengembang properti di daerah ini.""")
     st.markdown("<br>", unsafe_allow_html=True)
 
-
-    # Visualisasi: Top 5 Kecamatan dengan Harga Rata-Rata Tertinggi
-    st.subheader('Top 5 Kecamatan dengan Harga Rumah Rata-Rata Tertinggi')
-    top5_expensive_chart = alt.Chart(df.groupby('Kecamatan')['Harga'].mean().sort_values(ascending=False).head(5).reset_index()).mark_bar().encode(
-        x='Harga:Q',
-        y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan'),
-        tooltip=['Harga:Q']
-    ).properties(width=600)
-    st.altair_chart(top5_expensive_chart, use_container_width=True)
-    st.write("""Kecamatan pada grafik tersebut dapat menandakan kawasan elite yang biasanya dihuni oleh orang-orang dengan pendapatan tinggi karena rata-rata harga rumah pada daerah tersebut adalah yang paling mahal""")
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # Visualisasi: Top 5 Kecamatan dengan Harga Rata-Rata Terendah
-    st.subheader('Top 5 Kecamatan dengan Harga Rumah Rata-Rata Terendah')
-    top5_cheap_chart = alt.Chart(df.groupby('Kecamatan')['Harga'].mean().sort_values().head(5).reset_index()).mark_bar().encode(
-        x='Harga:Q',
-        y=alt.Y('Kecamatan:N', title='Kecamatan'),
-        tooltip=['Harga:Q']
-    ).properties(width=600)
-    st.altair_chart(top5_cheap_chart, use_container_width=True)
-    st.write("""Pada grafik ini, dapat disimpulkan bahwa kecamatan Ciracas, Jagakarsa, Kalideres, Pasar Rebo, dan Tanjung Barat merupakan kecamatan yang berada di daerah pinggiran Provinsi DKI Jakarta yang agak jauh dari pusat kota, sehingga rata-rata harga rumahnya paling rendah dibandingkan kecamatan lain.""")
-    st.markdown("<br>", unsafe_allow_html=True)
-
     col1, col2 = st.columns(2)
 
     with col1:
-        # Visualisasi: Top 5 Kecamatan dengan Luas Bangunan Terbesar
-        st.subheader('Top 5 Kecamatan dengan Luas Bangunan Terbesar')
-        top5_large_chart = alt.Chart(df.groupby('Kecamatan')['Luas Bangunan'].mean().sort_values(ascending=False).head(5).reset_index()).mark_bar().encode(
-            x='Luas Bangunan:Q',
-            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan'),
-            tooltip=['Luas Bangunan:Q']
-        ).properties(width=600)
-        st.altair_chart(top5_large_chart, use_container_width=True)
-
-    with col2:
-        # Visualisasi: Top 5 Kecamatan dengan Luas Bangunan Terkecil
-        st.subheader('Top 5 Kecamatan dengan Luas Bangunan Terkecil')
-        top5_small_chart = alt.Chart(df.groupby('Kecamatan')['Luas Bangunan'].mean().sort_values().head(5).reset_index()).mark_bar().encode(
-            x='Luas Bangunan:Q',
-            y=alt.Y('Kecamatan:N', title='Kecamatan'),
-            tooltip=['Luas Bangunan:Q']
-        ).properties(width=600)
-        st.altair_chart(top5_small_chart, use_container_width=True)
-
-    st.write("""Keberadaan kecamatan Tomang dan Pademangan pada grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata tertinggi dan Keberadaan kecamatan Jagakarsa dan Pasar Rebo pad grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata Terendah menandakan bahwa semakin besar luas bangunannya, maka semakin besar pula harga rumahnya. Sebaliknya semakin kecil luas bangunannya, semakin murah pula harga rumahnya.""")
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    col3, col4 = st.columns(2)
-
-    with col3:
         # Visualisasi: Distribusi Luas Tanah
         st.subheader('Distribusi Luas Tanah')
         land_area_distribution_chart = alt.Chart(df).mark_bar().encode(
@@ -98,7 +53,7 @@ def visualisasi_data():
             tooltip=['count():N']
         ).properties(width=600)
         st.altair_chart(land_area_distribution_chart, use_container_width=True)
-    with col4:   
+    with col2:   
         # Visualisasi: Distribusi Luas Bangunan
         st.subheader('Distribusi Luas Bangunan')
         building_area_distribution_chart = alt.Chart(df).mark_bar().encode(
@@ -110,28 +65,100 @@ def visualisasi_data():
 
     st.write("""Rumah berukuran kecil adalah rumah yang paling banyak dijual. Hal ini juga menandakan segmentasi pasar di DKI Jakarta yang masih didominasi kalangan menengah, hingga menengah ke bawah""")
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    col3, col4 = st.columns(2)
 
+    with col3:
+        # Visualisasi: Distribusi Kamar Tidur
+        st.subheader('Distribusi Kamar Tidur')
+        bed_chart = alt.Chart(df).mark_bar().encode(
+            x=alt.X('Kamar Tidur:N', title='Kamar Tidur'),
+            y='count():Q',
+            color='Kamar Tidur:N',
+            tooltip=['count():Q']
+        ).properties(width=600)
+        st.altair_chart(bed_chart, use_container_width=True)
+
+        st.write("""Rumah dengan 3 Kamar Tidur merupakan yang paling banyak dijual""")
+        st.markdown("<br>", unsafe_allow_html=True)
+
+    with col4:
+        # Visualisasi: Distribusi Kamar Mandi
+        st.subheader('Distribusi Kamar Mandi')
+        bath_chart = alt.Chart(df).mark_bar().encode(
+            x=alt.X('Kamar Mandi:N', title='Kamar Mandi'),
+            y='count():Q',
+            color='Kamar Mandi:N',
+            tooltip=['count():Q']
+        ).properties(width=600)
+        st.altair_chart(bath_chart, use_container_width=True)
+
+        st.write("""Rumah dengan 2 Kamar Mandi merupakan yang paling banyak dijual""")
+        st.markdown("<br>", unsafe_allow_html=True)
+
+    #Analisis Level Kecamatan
+    
     # Visualisasi: Banyaknya rumah yang dijual di tiap kecamatan
     st.subheader('Banyaknya Rumah yang Dijual di Tiap Kecamatan')
     kecamatan_count_chart = alt.Chart(df).mark_bar().encode(
-        x='count():N',
-        y=alt.Y('Kecamatan:N', title='Kecamatan'),
+        x=alt.X('count():N', title='Jumlah Rumah'),
+        y=alt.Y('Kecamatan:N', title='Kecamatan', sort='-x'),
         tooltip=['count():N']
     ).properties(width=600)
     st.altair_chart(kecamatan_count_chart, use_container_width=True)
     st.write("""Kecamatan Duren Sawit merupakan kecamatan dengan rumah yang paling banyak dijual, disusul oleh Kelapa Gading. Dalam hal ini, kemungkinan pada daerah tersebut banyak pengembang properti.""")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Visualisasi: Jumlah Properti Berdasarkan Kamar Tidur dan Kamar Mandi
-    st.subheader('Jumlah Properti Berdasarkan Kamar Tidur dan Kamar Mandi')
-    bed_bath_chart = alt.Chart(df).mark_bar().encode(
-        x='count():N',
-        y=alt.Y('Kamar Tidur:N', title='Kamar Tidur'),
-        color='Kamar Mandi:N',
-        tooltip=['count():N']
-    ).properties(width=600)
-    st.altair_chart(bed_bath_chart, use_container_width=True)
-    st.write("""Rumah dengan 2 Kamar Mandi dan 3 Kamar Tidur merupakan rumah yang paling banyak dijual""")
+    col5, col6 = st.columns(2)
+
+    with col5:
+        # Visualisasi: Top 5 Kecamatan dengan Harga Rata-Rata Tertinggi
+        st.subheader('Top 5 Kecamatan dengan Harga Rumah Rata-Rata Tertinggi')
+        top5_expensive_chart = alt.Chart(df.groupby('Kecamatan')['Harga'].mean().sort_values(ascending=False).head(5).reset_index()).mark_bar().encode(
+            x='Harga:Q',
+            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan'),
+            tooltip=['Harga:Q']
+        ).properties(width=600)
+        st.altair_chart(top5_expensive_chart, use_container_width=True)
+        st.write("""Kecamatan pada grafik tersebut dapat menandakan kawasan elite yang biasanya dihuni oleh orang-orang dengan pendapatan tinggi karena rata-rata harga rumah pada daerah tersebut adalah yang paling mahal""")
+        st.markdown("<br>", unsafe_allow_html=True)
+
+    with col6:
+        # Visualisasi: Top 5 Kecamatan dengan Harga Rata-Rata Terendah
+        st.subheader('Top 5 Kecamatan dengan Harga Rumah Rata-Rata Terendah')
+        top5_cheap_chart = alt.Chart(df.groupby('Kecamatan')['Harga'].mean().sort_values().head(5).reset_index()).mark_bar().encode(
+            x='Harga:Q',
+            y=alt.Y('Kecamatan:N', title='Kecamatan'),
+            tooltip=['Harga:Q']
+        ).properties(width=600)
+        st.altair_chart(top5_cheap_chart, use_container_width=True)
+        st.write("""Pada grafik ini, dapat disimpulkan bahwa kecamatan Ciracas, Jagakarsa, Kalideres, Pasar Rebo, dan Tanjung Barat merupakan kecamatan yang berada di daerah pinggiran Provinsi DKI Jakarta yang agak jauh dari pusat kota, sehingga rata-rata harga rumahnya paling rendah dibandingkan kecamatan lain.""")
+        st.markdown("<br>", unsafe_allow_html=True)
+
+
+    col7, col8 = st.columns(2)
+
+    with col7:
+        # Visualisasi: Top 5 Kecamatan dengan Luas Bangunan Terbesar
+        st.subheader('Top 5 Kecamatan dengan Luas Bangunan Terbesar')
+        top5_large_chart = alt.Chart(df.groupby('Kecamatan')['Luas Bangunan'].mean().sort_values(ascending=False).head(5).reset_index()).mark_bar().encode(
+            x='Luas Bangunan:Q',
+            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan'),
+            tooltip=['Luas Bangunan:Q']
+        ).properties(width=600)
+        st.altair_chart(top5_large_chart, use_container_width=True)
+
+    with col8:
+        # Visualisasi: Top 5 Kecamatan dengan Luas Bangunan Terkecil
+        st.subheader('Top 5 Kecamatan dengan Luas Bangunan Terkecil')
+        top5_small_chart = alt.Chart(df.groupby('Kecamatan')['Luas Bangunan'].mean().sort_values().head(5).reset_index()).mark_bar().encode(
+            x='Luas Bangunan:Q',
+            y=alt.Y('Kecamatan:N', title='Kecamatan'),
+            tooltip=['Luas Bangunan:Q']
+        ).properties(width=600)
+        st.altair_chart(top5_small_chart, use_container_width=True)
+
+    st.write("""Keberadaan kecamatan Tomang dan Pademangan pada grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata tertinggi dan Keberadaan kecamatan Jagakarsa dan Pasar Rebo pad grafik ini yang sebelumnya juga berada pada grafik Top 5 Kecamatan dengan Harga Rumah Rata-Rata Terendah menandakan bahwa semakin besar luas bangunannya, maka semakin besar pula harga rumahnya. Sebaliknya semakin kecil luas bangunannya, semakin murah pula harga rumahnya.""")
     st.markdown("<br>", unsafe_allow_html=True)
 
     # Visualisasi: Harga Rata-Rata Properti Berdasarkan Kota dan Kecamatan
@@ -157,8 +184,23 @@ def visualisasi_data():
     # Tampilkan chart
     st.altair_chart(chart, use_container_width=True)
 
+    def correlation_matrix(df):
+        # Calculate correlation
+        corr = df.corr()
 
-def prediksi_harga_rumah():
+        # Plotting correlation matrix using seaborn
+        plt.figure(figsize=(12, 8))
+        sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f", annot_kws={"size": 10})
+        plt.title('Correlation Matrix')
+        st.pyplot()
+
+    # Correlation Matrix
+    st.title('Correlation Matrix')
+
+    # Menampilkan correlation matrix
+    correlation_matrix(df[['Harga', 'Luas Bangunan', 'Luas Tanah', 'Kamar Tidur', 'Kamar Mandi', 'Lantai', 'HGB', 'Lainnya (PPJB, Girik, Adat, dll)', 'SHM', 'Jakarta Selatan', 'Jakarta Timur', 'Jakarta Pusat', 'Jakarta Barat', 'Jakarta Utara']])
+
+with prediksi:
     # Header Prediksi Harga Rumah
     st.header("Prediksi Harga Rumah dengan Linear Regression")
     st.write("""Silakan masukkan spesifikasi rumah yang ingin diprediksi harganya di bawah ini.""")
@@ -228,7 +270,7 @@ def prediksi_harga_rumah():
         st.write(f'Prediksi Harga Rumah: {formatted_price}')
 
 
-def about_me():
+with about:
     # Header
     st.header("About Me")
     st.write("Hi, My name is Tedja Diah Rani Octavia. I am an informatics student at Universitas Pembangunan Nasional Veteran Jakarta. Thank you for visiting my project.")
@@ -245,14 +287,3 @@ def about_me():
 
     # Thank You Message
     st.write("Thank you!")
-
-
-# Membuat tab
-app_mode = st.sidebar.selectbox("Pilih Tab", ["Visualisasi Data", "Prediksi Harga Rumah", "Author"])
-
-if app_mode == "Visualisasi Data":
-    visualisasi_data()
-elif app_mode == "Prediksi Harga Rumah":
-    prediksi_harga_rumah()
-elif app_mode == "Author":
-    about_me()
