@@ -33,7 +33,7 @@ with visualisasi:
     st.subheader('Banyaknya Rumah yang Dijual di Masing-Masing Kota')
     city_count_chart = alt.Chart(df).mark_bar().encode(
         x='count():N',
-        y=alt.Y('Kota:N', title='Kota'),
+        y=alt.Y('Kota:N', title='Kota', sort='-x'),
         tooltip=['count():N']
     ).properties(width=600)
     st.altair_chart(city_count_chart, use_container_width=True)
@@ -112,7 +112,7 @@ with visualisasi:
         st.subheader('Top 5 Kecamatan dengan Harga Rumah Rata-Rata Tertinggi')
         top5_expensive_chart = alt.Chart(df.groupby('Kecamatan')['Harga'].mean().sort_values(ascending=False).head(5).reset_index()).mark_bar().encode(
             x='Harga:Q',
-            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan'),
+            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan', sort='-x'),
             tooltip=['Harga:Q']
         ).properties(width=600)
         st.altair_chart(top5_expensive_chart, use_container_width=True)
@@ -122,7 +122,7 @@ with visualisasi:
         st.subheader('Top 5 Kecamatan dengan Harga Rumah Rata-Rata Terendah')
         top5_cheap_chart = alt.Chart(df.groupby('Kecamatan')['Harga'].mean().sort_values().head(5).reset_index()).mark_bar().encode(
             x='Harga:Q',
-            y=alt.Y('Kecamatan:N', title='Kecamatan'),
+            y=alt.Y('Kecamatan:N', title='Kecamatan', sort='-x'),
             tooltip=['Harga:Q']
         ).properties(width=600)
         st.altair_chart(top5_cheap_chart, use_container_width=True)
@@ -137,7 +137,7 @@ with visualisasi:
         st.subheader('Top 5 Kecamatan dengan Luas Bangunan Terbesar')
         top5_large_chart = alt.Chart(df.groupby('Kecamatan')['Luas Bangunan'].mean().sort_values(ascending=False).head(5).reset_index()).mark_bar().encode(
             x='Luas Bangunan:Q',
-            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan'),
+            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan', sort='-x'),
             tooltip=['Luas Bangunan:Q']
         ).properties(width=600)
         st.altair_chart(top5_large_chart, use_container_width=True)
@@ -147,7 +147,7 @@ with visualisasi:
         st.subheader('Top 5 Kecamatan dengan Luas Bangunan Terkecil')
         top5_small_chart = alt.Chart(df.groupby('Kecamatan')['Luas Bangunan'].mean().sort_values().head(5).reset_index()).mark_bar().encode(
             x='Luas Bangunan:Q',
-            y=alt.Y('Kecamatan:N', title='Kecamatan'),
+            y=alt.Y('Kecamatan:N', title='Kecamatan', sort='-x'),
             tooltip=['Luas Bangunan:Q']
         ).properties(width=600)
         st.altair_chart(top5_small_chart, use_container_width=True)
