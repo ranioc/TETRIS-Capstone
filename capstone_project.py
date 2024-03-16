@@ -137,7 +137,7 @@ with visualisasi:
         st.subheader('Top 5 Kecamatan dengan Luas Bangunan Terbesar')
         top5_large_chart = alt.Chart(df.groupby('Kecamatan')['Luas Bangunan'].mean().sort_values(ascending=False).head(5).reset_index()).mark_bar().encode(
             x='Luas Bangunan:Q',
-            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan', sort='-x'),
+            y=alt.Y('Kecamatan:N', title='Kecamatan', sort='-x'),
             tooltip=['Luas Bangunan:Q']
         ).properties(width=600)
         st.altair_chart(top5_large_chart, use_container_width=True)
