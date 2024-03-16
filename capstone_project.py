@@ -16,7 +16,7 @@ welcome_text = """
 Selamat datang di Dashboard "Harga Rumah dan Karakteristik Properti di Provinsi DKI Jakarta"! Melalui visualisasi interaktif yang disajikan, Anda dapat menjelajahi tren harga properti dan karakteristik properti di berbagai kota dan kecamatan di DKI Jakarta, hingga mencoba fitur prediksi harga rumah berdasarkan karakteristik tertentu. Dengan menggunakan model regresi linear, Anda dapat menginputkan variabel-variabel seperti luas bangunan, luas tanah, jumlah kamar tidur, dan lainnya untuk memperoleh estimasi harga properti. Selamat mengeksplorasi!
 """
 
-st.write(welcome_text)
+st.write(f'<div style="text-align: justify">{welcome_text}</div>', unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -39,7 +39,7 @@ with visualisasi:
         tooltip=['count():N']
     ).properties(width=600)
     st.altair_chart(city_count_chart, use_container_width=True)
-    st.write("""Jakarta Selatan merupakan kota dengan jumlah rumah dijual terbanyak, sedangkan Jakarta Utara adalah yang paling sedikit. Hal ini mungkin disebabkan karena tingginya permintaan rumah di Jakarta Selatan yang disebabkan oleh terpusatnya pertumbuhan ekonomi di wilayah tersebut yang dapat diindikasikan oleh banyaknya pengembang properti di daerah ini.""")
+    st.write('<div style="text-align: justify">Jakarta Selatan merupakan kota dengan jumlah rumah dijual terbanyak, sedangkan Jakarta Utara adalah yang paling sedikit. Hal ini mungkin disebabkan karena tingginya permintaan rumah di Jakarta Selatan yang disebabkan oleh terpusatnya pertumbuhan ekonomi di wilayah tersebut yang dapat diindikasikan oleh banyaknya pengembang properti di daerah ini.</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
@@ -53,6 +53,7 @@ with visualisasi:
             tooltip=['count():N']
         ).properties(width=600)
         st.altair_chart(land_area_distribution_chart, use_container_width=True)
+
     with col2:   
         # Visualisasi: Distribusi Luas Bangunan
         st.subheader('Distribusi Luas Bangunan')
@@ -63,7 +64,7 @@ with visualisasi:
         ).properties(width=600)
         st.altair_chart(building_area_distribution_chart, use_container_width=True)
 
-    st.write("""Rumah berukuran kecil adalah rumah yang paling banyak dijual. Hal ini juga menandakan segmentasi pasar di DKI Jakarta yang masih didominasi kalangan menengah, hingga menengah ke bawah""")
+    st.write('<div style="text-align: justify">Rumah berukuran kecil adalah rumah yang paling banyak dijual. Hal ini juga menandakan segmentasi pasar di DKI Jakarta yang masih didominasi kalangan menengah, hingga menengah ke bawah.</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
     
     col3, col4 = st.columns(2)
@@ -72,29 +73,24 @@ with visualisasi:
         # Visualisasi: Distribusi Kamar Tidur
         st.subheader('Distribusi Kamar Tidur')
         bed_chart = alt.Chart(df).mark_bar().encode(
-            x=alt.X('Kamar Tidur:N', title='Kamar Tidur'),
+            x=alt.X('Jumlah Kamar Tidur:N', title='Kamar Tidur'),
             y='count():Q',
-            color='Kamar Tidur:N',
             tooltip=['count():Q']
         ).properties(width=600)
         st.altair_chart(bed_chart, use_container_width=True)
-
-        st.write("""Rumah dengan 3 Kamar Tidur merupakan yang paling banyak dijual""")
-        st.markdown("<br>", unsafe_allow_html=True)
 
     with col4:
         # Visualisasi: Distribusi Kamar Mandi
         st.subheader('Distribusi Kamar Mandi')
         bath_chart = alt.Chart(df).mark_bar().encode(
-            x=alt.X('Kamar Mandi:N', title='Kamar Mandi'),
+            x=alt.X('Jumlah Kamar Mandi:N', title='Kamar Mandi'),
             y='count():Q',
-            color='Kamar Mandi:N',
             tooltip=['count():Q']
         ).properties(width=600)
         st.altair_chart(bath_chart, use_container_width=True)
 
-        st.write("""Rumah dengan 2 Kamar Mandi merupakan yang paling banyak dijual""")
-        st.markdown("<br>", unsafe_allow_html=True)
+    st.write('<div style="text-align: justify">Rumah dengan 2 Kamar Mandi dan 3 Kamar Tidur merupakan rumah yang paling banyak dijual. Hal ini dapat menandakan bahwa minat pasar yang banyak tertuju pada rumah dengan 3 Kamar TIdur dan 2 Kamar Mandi</div>', unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
     #Analisis Level Kecamatan
     
@@ -106,7 +102,7 @@ with visualisasi:
         tooltip=['count():N']
     ).properties(width=600)
     st.altair_chart(kecamatan_count_chart, use_container_width=True)
-    st.write("""Kecamatan Duren Sawit merupakan kecamatan dengan rumah yang paling banyak dijual, disusul oleh Kelapa Gading. Dalam hal ini, kemungkinan pada daerah tersebut banyak pengembang properti.""")
+    st.write('<div style="text-align: justify">Kecamatan Duren Sawit merupakan kecamatan dengan rumah yang paling banyak dijual, disusul oleh Kelapa Gading. Dalam hal ini, kemungkinan pada daerah tersebut banyak pengembang properti.</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
     col5, col6 = st.columns(2)
@@ -120,7 +116,7 @@ with visualisasi:
             tooltip=['Harga:Q']
         ).properties(width=600)
         st.altair_chart(top5_expensive_chart, use_container_width=True)
-        st.write("""Kecamatan pada grafik tersebut dapat menandakan kawasan elite yang biasanya dihuni oleh orang-orang dengan pendapatan tinggi karena rata-rata harga rumah pada daerah tersebut adalah yang paling mahal""")
+        st.write('<div style="text-align: justify">Kecamatan pada grafik tersebut dapat menandakan kawasan elite yang biasanya dihuni oleh orang-orang dengan pendapatan tinggi karena rata-rata harga rumah pada daerah tersebut adalah yang paling mahal.</div>', unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
 
     with col6:
@@ -132,7 +128,7 @@ with visualisasi:
             tooltip=['Harga:Q']
         ).properties(width=600)
         st.altair_chart(top5_cheap_chart, use_container_width=True)
-        st.write("""Pada grafik ini, dapat disimpulkan bahwa kecamatan Ciracas, Jagakarsa, Kalideres, Pasar Rebo, dan Tanjung Barat merupakan kecamatan yang berada di daerah pinggiran Provinsi DKI Jakarta yang agak jauh dari pusat kota, sehingga rata-rata harga rumahnya paling rendah dibandingkan kecamatan lain.""")
+        st.write('<div style="text-align: justify">Pada grafik ini, dapat disimpulkan bahwa kecamatan Ciracas, Jagakarsa, Kalideres, Pasar Rebo, dan Tanjung Barat merupakan kecamatan yang berada di daerah pinggiran Provinsi DKI Jakarta yang agak jauh dari pusat kota, sehingga rata-rata harga rumahnya paling rendah dibandingkan kecamatan lain.</div>', unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
 
 
