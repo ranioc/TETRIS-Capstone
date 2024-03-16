@@ -112,7 +112,7 @@ with visualisasi:
         st.subheader('Top 5 Kecamatan dengan Harga Rumah Rata-Rata Tertinggi')
         top5_expensive_chart = alt.Chart(df.groupby('Kecamatan')['Harga'].mean().sort_values(ascending=False).head(5).reset_index()).mark_bar().encode(
             x='Harga:Q',
-            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan', sort='-x'),
+            y=alt.Y('Kecamatan:N', sort='-x', title='Kecamatan'),
             tooltip=['Harga:Q']
         ).properties(width=600)
         st.altair_chart(top5_expensive_chart, use_container_width=True)
