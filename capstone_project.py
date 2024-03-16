@@ -24,6 +24,7 @@ with visualisasi:
     # Header analisis data harga jual rumah
     st.header("Visualisasi Data")
     st.write('<div style="text-align: justify">Data rumah yang digunakan pada analisis ini merupakan data rumah terbaru yang dijual pada tahun 2024 dan diambil dengan cara scraping dari situs olx.com pada tanggal 27 Februari 2024. Data rumah yang digunakan mencakup data dari 5 kota besar di Provinsi DKI Jakarta, yaitu kota Jakarta Selatan, Jakarta Timur, Jakarta Barat, Jakarta Pusat, dan Jakarta Utara.</div>', unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
     # Load data
     df = pd.read_csv('rumah_jakarta_clean.csv')
