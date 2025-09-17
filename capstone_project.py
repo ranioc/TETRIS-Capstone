@@ -254,6 +254,7 @@ with prediksi:
         # Menampilkan hasil prediksi
         st.write(f'Prediksi Harga Rumah: {formatted_price}')
 
+    # Evaluasi Model
     st.subheader("Evaluasi Model")
     st.image('Evaluasi.png', caption="Nilai MAE, MSE, R2, dan Accuracy Model")
     st.image('Grafik Prediksi.png', caption="Hasil Prediksi VS Harga Sebenarnya")
@@ -276,3 +277,4 @@ with about:
 
     # Thank You Message
     st.write("Thank you!")
+
