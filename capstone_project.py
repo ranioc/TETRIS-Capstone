@@ -168,7 +168,7 @@ with visualisasi:
     # Filter data berdasarkan Kota yang dipilih
     filtered_data = average_price_by_city_district[average_price_by_city_district['Kota'].isin(selected_city)]
 
-    # Buat chart Altair
+    # Chart Altair
     chart = alt.Chart(filtered_data).mark_bar().encode(
         x=alt.X('Harga:Q', axis=alt.Axis(title='Harga Rata-rata')),
         y=alt.Y('Kecamatan:N', axis=alt.Axis(title='Kecamatan'), sort='-x'),
