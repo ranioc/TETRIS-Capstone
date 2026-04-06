@@ -263,7 +263,7 @@ with prediksi:
 with about:
     # Header
     st.header("About Me")
-    st.write("Hi, My name is Tedja Diah Rani Octavia. I am an informatics student at Universitas Pembangunan Nasional Veteran Jakarta. Thank you for visiting my project.")
+    st.write("Hi, My name is Tedja Diah Rani Octavia. I am an informatics Engineering graduate from Universitas Pembangunan Nasional Veteran Jakarta. Thank you for visiting my project.")
 
     # Introduction
     st.write("Recently, I was interested in analyzing data. This was my very first data visualization dashboard project, so I'd love to hear any suggestions.")
